@@ -196,16 +196,19 @@ Nightbird.GifNode.prototype.draw = function(){
 		if( it.frames[ frame ] ){
 			var x = 0;
 			var y = 0;
-			var w = it.gif.width;
-			var h = it.gif.height;
-			if( w/it.canvas.width < h/it.canvas.height ){
-				y = (h-(w*it.canvas.height/it.canvas.width))/2;
-				h = w*it.canvas.height/it.canvas.width;
-			}else{
-				x = (w-(h*it.canvas.width/it.canvas.height))/2;
-				w = h*it.canvas.width/it.canvas.height;
+			var w = it.canvas.width;
+			var h = it.canvas.height;
+			if( it.gif.width/it.canvas.width < it.gif.height/it.canvas.height ){
+                //y = (h-(w*it.canvas.height/it.canvas.width))/2;
+				w = it.gif.width*h/it.gif.height;
+                x = (it.canvas.width-w)/2;
+            }else{
+				//x = (w-(h*it.canvas.width/it.canvas.height))/2;
+				h = it.gif.height*w/it.gif.width;
+                y = (it.canvas.height-h)/2;
 			}
-			it.context.drawImage( it.frames[ frame ], x, y, w, h, 0, 0, it.canvas.width, it.canvas.height );
+			//it.context.drawImage( it.frames[ frame ], 0, 0, it.gif.width, it.gif.height, x, y, w, h );
+            it.context.drawImage( it.frames[ frame ], x, y, w, h );
 		}
 
 	}
